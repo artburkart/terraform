@@ -159,6 +159,7 @@ func Provider() terraform.ResourceProvider {
 			"aws_s3_bucket_object":         dataSourceAwsS3BucketObject(),
 			"aws_subnet":                   dataSourceAwsSubnet(),
 			"aws_security_group":           dataSourceAwsSecurityGroup(),
+			"aws_volume":                   dataSourceAwsVolumes(),
 			"aws_vpc":                      dataSourceAwsVpc(),
 		},
 
