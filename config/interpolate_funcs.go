@@ -63,6 +63,7 @@ func Funcs() map[string]ast.Function {
 		"compact":      interpolationFuncCompact(),
 		"concat":       interpolationFuncConcat(),
 		"distinct":     interpolationFuncDistinct(),
+		"duration":     interpolationFuncDuration(),
 		"element":      interpolationFuncElement(),
 		"file":         interpolationFuncFile(),
 		"floor":        interpolationFuncFloor(),
@@ -626,6 +627,23 @@ func interpolationFuncDistinct() ast.Function {
 			}
 
 			return stringSliceToVariableValue(list), nil
+		},
+	}
+}
+
+// interpolationFuncDuration implements the "duration" function that
+// allows math expressions to be used with "string" representations
+// of time.Duration
+func interpolationFuncDuration() ast.Function {
+	return ast.Function{
+		ArgTypes:   []ast.Type{ast.TypeString},
+		ReturnType: ast.TypeInt,
+		Callback: func(args []interface{}) (interface{}, error) {
+			duration, err := time.ParseDuration(args[0].(string))
+			if err != nil {
+				return nil, err
+			}
+			return duration, nil
 		},
 	}
 }
