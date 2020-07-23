@@ -54,6 +54,13 @@ func TestFunctions(t *testing.T) {
 			},
 		},
 
+		"all": {
+			{
+				`all([true, false])`,
+				cty.False,
+			},
+		},
+
 		"abspath": {
 			{
 				`abspath(".")`,
